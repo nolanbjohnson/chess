@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Square from './components/Square.js'
-import Move from './components/Move.js'
+import Moves from './components/Moves.js'
 import {BOARD_SIZE_X, BOARD_SIZE_Y, LETTERS, STARTING_POSITIONS} from './constants.js'
 import * as savedGame from './gameState.js'
 import './App.css';
@@ -146,12 +146,12 @@ class App extends Component {
 
       })
     
-    const moves = this.state.moves.map(move => <Move notation={move['notation']} 
-                                                     moveNumber={move['moveNumber']} 
-                                                     positions={move['positions']} 
-                                                     onClick={this.undoToMove} 
-                                                     onHover={this.previewUndo} 
-                                                     onMouseOut={this.previewUndoEnd} />)
+    // const moves = this.state.moves.map(move => <Move notation={move['notation']} 
+    //                                                  moveNumber={move['moveNumber']} 
+    //                                                  positions={move['positions']} 
+    //                                                  onClick={this.undoToMove} 
+    //                                                  onHover={this.previewUndo} 
+    //                                                  onMouseOut={this.previewUndoEnd} />)
 
     const takes = this.state.takenPieces.map(take => <div className={ this.state.previewState && take.moveNumber > this.state.previewMoveNumber ? "board-takes__undo" : "" }> {take.piece} </div>)
 
@@ -161,11 +161,17 @@ class App extends Component {
           <div className="board-history">
             <h3>History</h3>
             <button onClick={ this.resetBoard }>Reset</button>
-            <div className="board-moves__fade-before"></div>
+
+            <Moves moves={this.state.moves}
+                   undoToMove={this.undoToMove} 
+                   previewUndo={this.previewUndo} 
+                   previewUndoEnd={this.previewUndoEnd}/>
+
+            {/*<div className="board-moves__fade-before"></div>
             <div className="board-moves">
               { moves }
             </div>
-            <div className="board-moves__fade-after"></div>
+            <div className="board-moves__fade-after"></div>*/}
             
           </div>
           <div className="board">
