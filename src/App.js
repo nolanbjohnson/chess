@@ -4,6 +4,7 @@ import Moves from './components/Moves.js'
 import Description from './components/Description.js'
 import {BOARD_SIZE_X, BOARD_SIZE_Y, LETTERS, STARTING_POSITIONS} from './constants.js'
 import * as savedGame from './gameState.js'
+import * as savedEndGame from './endGameState.js'
 import './App.css';
 
 function indexToRowFile(index) {
@@ -16,7 +17,7 @@ function indexToLetter(index) {
   return LETTERS.split('')[index]
 }
 
-const starting_state = {
+const startingState = {
       positions: STARTING_POSITIONS,
       activeSquare: '',
       activePiece: '',
@@ -28,7 +29,7 @@ const starting_state = {
       takenPieces: []
     }
 
-const alternate_starting_state = {
+const alternateStartingState = {
       positions: savedGame.positions,
       activeSquare: '',
       activePiece: '',
@@ -40,10 +41,22 @@ const alternate_starting_state = {
       takenPieces: savedGame.takenPieces
   }
 
+const endGameState = {
+      positions: savedEndGame.positions,
+      activeSquare: '',
+      activePiece: '',
+      moves: savedEndGame.moves,
+      moveNumber: savedEndGame.moveNumber,
+      previewPositions: {},
+      previewState: false,
+      previewMoveNumber: 999,
+      takenPieces: savedEndGame.takenPieces
+  }
+
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = alternate_starting_state
+    this.state = endGameState
     this.resetBoard = this.resetBoard.bind(this)
     this.activateSquare = this.activateSquare.bind(this)
     this.movePiece = this.movePiece.bind(this)
@@ -76,7 +89,7 @@ class App extends Component {
   // }
 
   resetBoard() {
-    this.setState(starting_state)
+    this.setState(startingState)
   }
 
   movePiece(idxFrom, idxTo, piece) {

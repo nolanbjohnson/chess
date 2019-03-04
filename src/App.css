@@ -232,13 +232,16 @@ dd {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
-  height: 95%;
+  min-height: 25%;
+  max-height: 95%;
   width: 4.5em;
   margin-left: 20px;
 
   border: 1px solid #eee;
 
   font-size: 2em;
+
+  overflow-y: overlay;
 }
 
 @media (max-width: 860px) {
