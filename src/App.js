@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Square from './components/Square.js'
 import Moves from './components/Moves.js'
+import Description from './components/Description.js'
 import {BOARD_SIZE_X, BOARD_SIZE_Y, LETTERS, STARTING_POSITIONS} from './constants.js'
 import * as savedGame from './gameState.js'
 import './App.css';
@@ -157,7 +158,18 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div className="header"><h1>Trusty Chess</h1></div>
+
+        <div className="header">
+          <h1>
+            Trusty Chess
+
+          </h1>
+          <input type="checkbox" name="toggle" id="toggle" />
+          <label for="toggle"></label>
+          <Description />
+          
+        </div>
+        
           <div className="board-history">
             <h3>History</h3>
             <button onClick={ this.resetBoard }>Reset</button>
