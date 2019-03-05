@@ -1,8 +1,7 @@
 {
   "name": "chess",
   "version": "0.1.0",
-  "private": true,
-  "homepage": "http://nolj.github.io/trusty-chess",
+  "homepage": "https://pages.git.generalassemb.ly/nolj/trusty-chess/",
   "dependencies": {
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
