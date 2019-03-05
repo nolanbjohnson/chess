@@ -56,7 +56,7 @@ const endGameState = {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = endGameState
+    this.state = startingState
     this.resetBoard = this.resetBoard.bind(this)
     this.activateSquare = this.activateSquare.bind(this)
     this.movePiece = this.movePiece.bind(this)
