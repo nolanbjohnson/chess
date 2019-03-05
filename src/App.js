@@ -178,7 +178,7 @@ class App extends Component {
 
           </h1>
           <input type="checkbox" name="toggle" id="toggle" />
-          <label for="toggle"></label>
+          <label htmlFor="toggle"></label>
           <Description />
           
         </div>
@@ -214,9 +214,9 @@ class App extends Component {
             <div className="board-letters">
               { boardLetters }
             </div>
-            <div className="board-takes">
+          </div>
+          <div className="board-takes">
               { takes }
-            </div>
           </div>
       </div>
     );
