@@ -17,6 +17,21 @@ export const PIECE_LOOKUP = (charRepresentation, color='black') => {
 	return pieces[charIndex + (color === 'black' ? 0 : 7)]
 }
 
+
+export const PIECE_DICTIONARY = [
+	{ character: "♔", decimal: "9812", hex: "2654", color: "WHITE", piece: "KING", name: "WHITE CHESS KING" }, 
+	{ character: "♕", decimal: "9813", hex: "2655", color: "WHITE", piece: "QUEEN", name: "WHITE CHESS QUEEN" }, 
+	{ character: "♖", decimal: "9814", hex: "2656", color: "WHITE", piece: "ROOK", name: "WHITE CHESS ROOK" }, 
+	{ character: "♗", decimal: "9815", hex: "2657", color: "WHITE", piece: "BISHOP", name: "WHITE CHESS BISHOP" }, 
+	{ character: "♘", decimal: "9816", hex: "2658", color: "WHITE", piece: "KNIGHT", name: "WHITE CHESS KNIGHT" }, 
+	{ character: "♙", decimal: "9817", hex: "2659", color: "WHITE", piece: "PAWN", name: "WHITE CHESS PAWN" }, 
+	{ character: "♚", decimal: "9818", hex: "265A", color: "BLACK", piece: "KING", name: "BLACK CHESS KING" }, 
+	{ character: "♛", decimal: "9819", hex: "265B", color: "BLACK", piece: "QUEEN", name: "BLACK CHESS QUEEN" }, 
+	{ character: "♜", decimal: "9820", hex: "265C", color: "BLACK", piece: "ROOK", name: "BLACK CHESS ROOK" }, 
+	{ character: "♝", decimal: "9821", hex: "265D", color: "BLACK", piece: "BISHOP", name: "BLACK CHESS BISHOP" }, 
+	{ character: "♞", decimal: "9822", hex: "265E", color: "BLACK", piece: "KNIGHT", name: "BLACK CHESS KNIGHT" }, 
+	{ character: "♟", decimal: "9823", hex: "265F", color: "BLACK", piece: "PAWN", name: "BLACK CHESS PAWN" }
+]
 // export const STARTING_POSITIONS = {
 // 	a2: 'P',
 // 	b2: 'P',

@@ -157,7 +157,7 @@ dd {
     margin-bottom: -30px; /* extra 10px top margin */
     height: 31px;
     width: 90%;
-    background: linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    background: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
     position: relative;
     pointer-events: none;
 
@@ -443,13 +443,12 @@ button:active {
   }
 
   .header {
-    
+
   }
   
   .board-history {
     display: flex;
-    width: 80vw;
-    margin-left: 0;
+    width: 85vw;
     margin-bottom: 0px;
 
   } 
@@ -466,7 +465,7 @@ button:active {
   .notation {
     display: flex;
     flex-direction: column;
-    margin: 5px;
+    padding: 5px;
   }
 
   .board-moves__fade-before {

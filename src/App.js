@@ -2,16 +2,11 @@ import React, { Component } from 'react';
 import Square from './components/Square.js'
 import Moves from './components/Moves.js'
 import Description from './components/Description.js'
-import {BOARD_SIZE_X, BOARD_SIZE_Y, LETTERS, STARTING_POSITIONS} from './constants.js'
+import {BOARD_SIZE_X, BOARD_SIZE_Y, LETTERS, STARTING_POSITIONS, PIECE_DICTIONARY} from './constants.js'
 import * as savedGame from './gameState.js'
 import * as savedEndGame from './endGameState.js'
+import * as savedAltEndGame from './altEndGameState.js'
 import './App.css';
-
-function indexToRowFile(index) {
-  // maps from number position from bottom left (a1) through top right (h8)
-  const row = Math.floor(index / BOARD_SIZE_X)
-
-}
 
 function indexToLetter(index) {
   return LETTERS.split('')[index]
@@ -31,32 +26,30 @@ const startingState = {
 
 const alternateStartingState = {
       positions: savedGame.positions,
-      activeSquare: '',
-      activePiece: '',
       moves: savedGame.moves,
       moveNumber: savedGame.moveNumber,
-      previewPositions: {},
-      previewState: false,
-      previewMoveNumber: 999,
       takenPieces: savedGame.takenPieces
   }
 
 const endGameState = {
       positions: savedEndGame.positions,
-      activeSquare: '',
-      activePiece: '',
       moves: savedEndGame.moves,
       moveNumber: savedEndGame.moveNumber,
-      previewPositions: {},
-      previewState: false,
-      previewMoveNumber: 999,
       takenPieces: savedEndGame.takenPieces
+  }
+
+
+const altEndGameState = {
+      positions: savedAltEndGame.positions,
+      moves: savedAltEndGame.moves,
+      moveNumber: savedAltEndGame.moveNumber,
+      takenPieces: savedAltEndGame.takenPieces
   }
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = startingState
+    this.state = {...startingState, ...altEndGameState}
     this.resetBoard = this.resetBoard.bind(this)
     this.activateSquare = this.activateSquare.bind(this)
     this.movePiece = this.movePiece.bind(this)
@@ -121,7 +114,7 @@ class App extends Component {
     })
   }
 
-  undoToMove(moveNumber, positions) {
+  undoToMove([moveNumber, positions]) {
     this.setState((prevState) => {
       return {positions: positions, 
               moves: prevState.moves.slice(0, moveNumber), 
@@ -145,13 +138,15 @@ class App extends Component {
   }
 
   render() {
+
+
     const boardLetters = Array(BOARD_SIZE_X).fill(0).map((square, index) => <div key={index} className="letters">{indexToLetter(index)}</div> )
     const boardNumbers = Array(BOARD_SIZE_Y).fill(0).map((square, index) => <div key={index} className="numbers">{index + 1}</div> )
     const boardSquares = Array(BOARD_SIZE_Y).fill(Array(BOARD_SIZE_X).fill(0)).map((row, rowIndex) => {
         let cells = row.map((column, columnIndex) => {
           const square = indexToLetter(columnIndex)+Math.abs(rowIndex-8) // board is from bottom left to top right, so swap row index
           return <Square key={square} 
-                         idx={square} 
+                         idx={square}
                          selected={ this.state.activeSquare === square }
                          piece={this.state.previewState ? this.state.previewPositions[square] : this.state.positions[square]} 
                          onClick={this.activateSquare} />
@@ -167,11 +162,10 @@ class App extends Component {
     //                                                  onHover={this.previewUndo} 
     //                                                  onMouseOut={this.previewUndoEnd} />)
 
-    const takes = this.state.takenPieces.map(take => <div className={ this.state.previewState && take.moveNumber > this.state.previewMoveNumber ? "board-takes__undo" : "" }> {take.piece} </div>)
+    const takes = this.state.takenPieces.map((take, i) => <div key={i} className={ this.state.previewState && take.moveNumber > this.state.previewMoveNumber ? "board-takes__undo" : "" } > {take.piece} </div>)
 
     return (
       <div className="App">
-
         <div className="header">
           <h1>
             Trusty Chess

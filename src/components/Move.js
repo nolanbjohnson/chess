@@ -1,15 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
+
+let pauseEvents = false // Not supposed to use module level variable, but want var to be shared and don't know where debounce-style state would belong
 
 function Move({notation, moveNumber, positions, onClick, onHover, onMouseOut}) {
-	const [stateBeforeMove, setStateBeforeMove] = useState(positions)
+
 	const move = useRef(null)
 
 	function handleClick(e) {
-		onClick(move.current.dataset.moveNumber, stateBeforeMove)
+		pauseEvents = true
+		onClick([move.current.dataset.moveNumber, positions])
+		setTimeout(() => {
+			pauseEvents = false
+		}, 500)
 	}
 
 	function handleHover(e) {
-		onHover(stateBeforeMove, moveNumber)
+		if (!pauseEvents) onHover(positions, moveNumber)
 	}
 
 	function handleMouseOut(e) {

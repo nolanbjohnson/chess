@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 function Square({idx, piece, selected, onClick}) {
 
-	let square = React.useRef(null)
+	let square = useRef(null)
 
 	function handleClick(e) {
 		onClick(idx, piece || '')
